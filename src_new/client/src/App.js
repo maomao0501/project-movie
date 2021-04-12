@@ -36,7 +36,7 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route exact path="/" component={HomeScreen} />
-            <Route path={["/search", "/search/:title"]} exact={true}>
+            <Route path={["/search", "/search/:title", "/search/:title/page/:pageId"]} exact={true}>
               <SearchScreen/>
             </Route>
             <Route path="/details/:imdbID" exact={true}>
