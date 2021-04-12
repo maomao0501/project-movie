@@ -10,6 +10,9 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "author": "CS5610",
   "license": "NEU",
   "dependencies": {
