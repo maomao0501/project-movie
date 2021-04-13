@@ -6,9 +6,10 @@ import searchmovie from "../content/searchmovie.png";
 import MovieGrid from "./movie/movie-grid";
 
 const SearchScreen = () => {
+    const history = useHistory();
     const { title, pageId } = useParams();
     const [searchTitle, setSearchTitle] = useState(title);
-    const [popular, setPopular] = useState(true);
+    const [popular, setPopular] = useState(null);
     const [results, setResults] = useState({ results: [] });
     useEffect(() => {
         // if(title !== undefined && title.type !== undefined) {
@@ -16,7 +17,7 @@ const SearchScreen = () => {
         findMoviesByTitle(title, pageId)
     }, [title, pageId])
     const findMoviesByTitle = (title, pageId) => {
-        if (title === undefined || title === "" || title.type !== undefined) {
+        if (title === undefined || title === "") {
             setPopular(true)
             movieService.findPopular()
                 .then((result) => {
@@ -35,7 +36,12 @@ const SearchScreen = () => {
                 movieService.findMoviesByTitle(title, pageId)
                     .then((results) => {
                         setResults(results)
+                        if (results.total_results == 0) {
+                            history.push("/search")
+                        }
                     })
+
+                    
             }
         }
     }
@@ -63,7 +69,7 @@ const SearchScreen = () => {
                         <Link to={`/search`}
                               className="btn btn-primary">
                             {/*<img width="25" src={searchmovie} />*/}
-                            Search
+                            Search Movie
                         </Link>
                     }
                 </div>
